@@ -1,0 +1,281 @@
+<script type="text/x-mathjax-config">
+
+    MathJax.Hub.PreProcess.disabled = true;
+
+    MathJax.Hub.Config({
+
+        "HTML-CSS": {
+            scale: 95,
+            styles: {
+                ".MathJax": {
+                    padding: "4px 0",
+                    display: "inline-block !important",
+                },
+            },
+        },
+        "CHTML": {
+            scale: 95,
+            styles: {
+                ".MathJax": {
+                    padding: "4px 0",
+                    display: "inline-block !important",
+                },
+            }
+        },
+        "SVG": {
+            scale: 95,
+            styles: {
+                ".MathJax": {
+                    padding: "4px 0",
+                    display: "inline-block !important",
+                },
+            }
+        }, 
+
+        menuSettings: {
+            zoom: "Click",          //  when to do MathZoom
+            CTRL: false,            //    require CTRL for MathZoom?
+            ALT: false,             //    require Alt or Option?
+            CMD: false,             //    require CMD?
+            Shift: true,            //    require Shift?
+            discoverable: false,    //  make math menu discoverable on hover?
+            zscale: "200%",         //  the scaling factor for MathZoom
+            renderer: null,         //  set when Jax are loaded
+            font: "Auto",           //  what font HTML-CSS should use
+            context: "Browser",     //  or "Browser" for pass-through to browser menu
+            locale: "pt-br",        //  the language to use for messages
+            mpContext: false,       //  true means pass menu events to MathPlayer in IE
+            mpMouse: false,         //  true means pass mouse events to MathPlayer in IE
+            texHints: true,         //  include class names for TeXAtom elements
+            FastPreview: false,     //  use PreviewHTML output as preview?
+            assistiveMML: true,     //  include hidden MathML for screen readers?
+            inTabOrder: false,      //  set to true if math elements should be included in the tabindex
+            semantics: false        //  add semantics tag with original form in MathML output
+        },
+        MathMenu: {
+            delay: 500,
+            showLocale: false,
+            showMathPlayer: false,
+        },
+        tex2jax: {
+            inlineMath: [ ['\[tex3\]','\[\/tex3\]'] ],
+            processEnvironments: false,
+            preview: ["[carregando equação]"],
+            processEscapes: true
+        },
+//      jsMath2jax: {
+//             preview: ["[carregando equação]"],
+//         },
+//         mml2jax: {
+//             preview: ["[carregando equação]"],
+//         },
+//         asciimath2jax: {
+//             preview: ["[carregando equação]"],
+//         },
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js","begingroup.js","autobold.js","[Contrib]/sqrtspacing/sqrtspacing.js"],
+            noErrors: {
+                disabled: true
+            },
+            Macros: {
+                sen: ["\\operatorname\{sen\}"],
+                tg: ["\\operatorname\{tg\}"],
+                cotg: ["\\operatorname\{cotg\}"],
+                cossec: ["\\operatorname\{cossec\}"],
+                cosec: ["\\operatorname\{cosec\}"],
+                arctg: ["\\operatorname\{arctg\}"],
+                arcotg: ["\\operatorname\{arcotg\}"],
+                arccotg: ["\\operatorname\{arccotg\}"],
+                arcsen: ["\\operatorname\{arcsen\}"],
+                cis: ["\\operatorname\{cis\}"],
+                rad: ["\\operatorname\{rad\}"],
+                arcsenh: ["\\operatorname\{arcsenh\}"],
+                arccosh: ["\\operatorname\{arccosh\}"],
+                MDC: ["\\operatorname\{MDC\}"],
+                mdc: ["\\operatorname\{MDC\}"],
+                mod: ["\\operatorname\{mod\}"],
+                mol: ["\\operatorname\{mol\}"],
+                micro : ["\\mu"],
+                "(" : ["\\left\("],
+                ")" : ["\\right\)"],
+                "[" : ["\\left\["],
+                "]" : ["\\right\]"],
+                "Scorpio" : ["♏"],
+                "molaridade" : ["♏"],
+                "ohm" : ["\\Omega"],
+                "celsius" : ["º C"],
+                "degree" : ["º"],
+                "degrees" : ["º"],
+            },
+            mathsize: "90%",
+            noUndefined: {
+                attributes: {
+                    mathcolor: "white",
+                    mathbackground: "red",
+                    mathsize: "90%",
+                }
+            }
+        },
+
+    });
+    
+    // Signal "New Math" é enviado cada vez que uma nova equação é parseada na tela pelo MathJax.
+    // Daí arrumo o CSS dela e coloco a função para clicar e aparecer o preview
+    // E também verifico se ela vai ser maior do que o espaço dela (pra aparecer o "clique para ver inteira")
+    MathJax.Hub.Register.MessageHook("New Math", function (message) {
+        el_id = "#" + message[1] + "-Frame";
+        //el é a equação sendo adicionada na tela
+        el = $(el_id);
+        math = el[0];
+        parent = el.parent().parent().parent();
+
+        //var script = MathJax.Hub.getJaxFor(message[1]).SourceElement();
+        //console.log('SCRIPT: ' + script.text);
+        //MathJax.HTML.addText(math,message.join(" ")+": '"+script.text+"'");
+        //MathJax.HTML.addElement(math,"br");
+                
+        el.attr('unselectable','on')
+            .css({'-moz-user-select':'-moz-none',
+                  '-moz-user-select':'none',
+                  '-o-user-select':'none',
+                  '-khtml-user-select':'none', 
+                  '-webkit-user-select':'none',
+                  '-ms-user-select':'none',
+                  'user-select':'none'
+            })
+            .bind('selectstart', function(){ return false; })
+            .hover(function(){$(this).css("cursor", "pointer")})
+            .on("click", function(e){if(!e.shiftKey){tex_popup3(this);}});
+        
+        // limites de r1 (retângulo de fora) e r2 (retângulo da equação).
+        r1 = parent[0].getBoundingClientRect();
+        r2 = el[0].getBoundingClientRect();
+        comprimento = r2.right-r2.left;
+        altura = r2.bottom-r2.top;
+        //console.log('imagemH: ' + r2.left + ' ' + r2.right);
+        //console.log('imagemV: ' + r2.top + ' ' + r2.bottom);
+        //console.log("tamanho da imagem: " + comprimento + " por " + altura);
+        // verifica se r2 tem alguma parte pra fora de r1
+        if(r1.right < r2.right || r1.left > r2.left || r1.bottom < r2.bottom || r1.top > r2.top) {
+           el.addClass('eq_tapada');
+           //console.log('eq_tapada');
+        } else {
+            //console.log('VISÍVEL');
+        }
+        console.log("\n");
+    });
+
+    MathJax.Hub.processSectionDelay = 0;
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready",function () {
+        MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros,{
+            cancel: ["Extension","cancel"],
+            bcancel: ["Extension","cancel"],
+            xcancel: ["Extension","cancel"],
+            cancelto: ["Extension","cancel"],
+            color: ["Extension","color"]
+        });
+        
+        // O código abaixo é para deixar todas expressões matemáticas
+        // como displaystyle, ou seja, não diminuir a fonte por ser inline.
+        // Fonte: https://groups.google.com/forum/#!topic/mathjax-users/licbps4hk4U
+        var TEX = MathJax.InputJax.TeX;
+        var PREFILTER = TEX.prefilterMath;
+        TEX.Augment({
+            prefilterMath: function (math,displaymode,script) {
+                math = "\\displaystyle\{\{"+math+"\}\}";
+                return PREFILTER.call(TEX,math,displaymode,script);
+            }
+        });
+
+    });
+
+    MathJax.Hub.Register.StartupHook("End Jax",function () {
+        var BROWSER = MathJax.Hub.Browser;
+        var canUseMML = (BROWSER.isFirefox && BROWSER.versionAtLeast("1.5")) ||
+                        (BROWSER.isMSIE    && BROWSER.hasMathPlayer) ||
+                        (BROWSER.isSafari  && BROWSER.versionAtLeast("5.0")) ||
+                        (BROWSER.isOpera   && BROWSER.versionAtLeast("9.52") &&
+                                            !BROWSER.versionAtLeast("14.0"));
+        var CONFIG = MathJax.Hub.CombineConfig("MMLorHTML",{
+            prefer: {
+                MSIE:"MML", Firefox:"HTML", Opera:"HTML", Chrome:"HTML", Safari:"HTML",
+                other:"HTML"
+            }
+        });
+        var jax = CONFIG.prefer[BROWSER] || CONFIG.prefer.other;
+        if (jax === "HTML") jax = "HTML-CSS"; else if (jax === "MML")  jax = "NativeMML";
+        if (jax === "NativeMML" && !canUseMML) jax = CONFIG.prefer.other;
+        return MathJax.Hub.setRenderer(jax);
+    });
+</script>
+
+<script>
+function tex_popup3(equacao) {
+    console.time("Tempo Total");
+    codigo = $(equacao).prev(); // é a caixa com o código latex
+    // $(equacao) é a equação renderizada pelo MathJax
+    $(".codebox").not(codigo).hide(); //Apaga todos popups de código existentes, menos da equação que clicou
+    $(".MathJax").not($(equacao)).toggleClass("red_carpet", false); //Apaga todas equações red_carpets existentes, menos a eq. que clicou
+    codigo_top = $(equacao).position().top + $(equacao).outerHeight();
+    console.log($(equacao));
+    console.log('esse é o id: ' + $(equacao).attr('id'));
+
+    //I need to get the original Tex markup with $$ delimiters
+    //once the Math gets rendered
+    var math = MathJax.Hub.getAllJax($(equacao).parent()[0])[0];
+    console.log('math: ' + math);
+    var text =  '$' + math.originalText + '$';
+    if (math.root.display) text = '$' + text + '$';
+
+    if (!codigo.hasClass('codebox'))
+    {
+        $("<dl class='codebox tex_popup tex_popup_lateral_esquerda' style='display: block;'> \
+            <dd> \
+                <code class='tex2jax_ignore'>" + text + "</code> \
+            </dd> \
+        </dl>").insertBefore(equacao)
+                .hide();
+        codigo = $(equacao).prev(); // é a caixa com o código latex (coloquei o código de novo para quando não está presente)
+    } else {
+        if (codigo.is(':visible')){
+
+        }
+    }
+    codigo.css('top', codigo_top);
+    codigo.toggle();
+    $(equacao).toggleClass("red_carpet");
+    equacao_esquerda = $(equacao).offset().left;
+    codigo_esquerda = codigo.offset().left;
+    tamanho_codigo = codigo.outerWidth();
+    tamanho_equacao = $(equacao).outerWidth();
+    equacao_direita = $(equacao).offset().left + tamanho_equacao;
+    codigo_direita = codigo.offset().left + tamanho_codigo;
+    
+    $('.MathJax').toggleClass("red_carpet_lateral_direita", false);
+    codigo.toggleClass("tex_popup_lateral_direita", false);
+    $('.MathJax').toggleClass("red_carpet_lateral_esquerda", false);
+    codigo.toggleClass("tex_popup_lateral_esquerda", false);
+    $('.MathJax').toggleClass("red_carpet_total", false);
+    codigo.toggleClass("tex_popup_total", false);
+    $('.cooked').toggleClass('show_full_equation',false);
+
+    if (tamanho_equacao < tamanho_codigo) {
+        if (equacao_esquerda < codigo_esquerda) {
+            $(equacao).toggleClass("red_carpet_lateral_esquerda", true);
+            codigo.toggleClass("tex_popup_lateral_esquerda", true);
+        }
+        if (equacao_direita + 5 > codigo_direita) {
+            $(equacao).toggleClass("red_carpet_lateral_direita", true);
+            codigo.toggleClass("tex_popup_lateral_direita", true);
+        }        
+    } else {
+            $(equacao).toggleClass("red_carpet_total", true);
+            codigo.toggleClass("tex_popup_total", true);
+            codigo.css('top', codigo_top + 2);
+            if (codigo_esquerda != 0){
+                $('.cooked').toggleClass('show_full_equation',true);
+            }
+    }
+    console.timeEnd("Tempo Total");
+}
+</script>

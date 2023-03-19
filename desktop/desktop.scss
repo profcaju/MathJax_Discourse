@@ -1,0 +1,43 @@
+// .MathJax:hover {
+//     outline: 1px dashed black;
+//     border-radius: 5px;
+//     
+// }
+
+.MathJax:hover{
+    background-color: var(--primary-low);
+}
+
+.MathJax:hover:after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    bottom: -5px;
+    right: -5px;
+    border: 1px dashed var(--secondary-medium);
+    border-radius: 5px;
+}
+
+.MathJax.red_carpet:hover:after {
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+.MathJax.red_carpet:hover:before{
+    content: "";
+    border: 0;
+}
+// .MathJax:hover:before {
+//     content: "clique para ver inteira";
+//     font-size: 0.7em;
+//     font-family: monospace;
+//     text-align: end;
+//     position: absolute;
+//     left: 0;
+//     top: -21px;
+//     padding: 1px 5px;
+//     border: 1px dashed var(--primary);
+//     background-color: var(--highlight-low);
+//     border-radius: 5px 5px 0 0;
+// }

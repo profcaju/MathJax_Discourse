@@ -1,0 +1,98 @@
+// Arruma o zoom do Mathjax que, no dark mode, ficava com fundo branco e letra branca.
+#MathJax_Zoom {
+        background-color: var(--secondary) !important;
+}
+
+/*********************
+popup TEX3
+**********************/
+.red_carpet {
+    border-radius: 1px;
+    margin: -4px -10px -2px !important;
+    border-top-right-radius: 5px;
+
+	border-width: 2px 2px 0 !important;
+    border-style: solid !important;
+    border-color: var(--secondary-medium) !important;
+
+    padding: 6px 8px !important;
+    z-index: 100;
+    border-top-left-radius: 5px;
+	position: relative !important;
+}
+
+dt.eqn_faixa {
+    color: var(--primary); // cor da fonte
+    font-size: .9em;
+    margin: 0;
+    padding-left: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.red_carpet, dt.eqn_faixa {
+    background-color: var(--primary-low) !important;
+}
+.tex_popup {
+    display: none;
+    margin: 0 !important;
+    border: 2px solid var(--secondary-medium) !important;
+    background-color: var(--primary-100) !important;
+    z-index: 3; // Para ficar acima dos avatars, caso tenha
+    position: absolute;
+    border-radius: 5px;
+    text-align: left;
+    border-color: var(--secondary-medium) !important;
+    width: -webkit-calc(100% - 4px);
+    width:    -moz-calc(100% - 4px);
+    width:         calc(100% - 4px);
+}
+.red_carpet.red_carpet_lateral_esquerda{
+	left:10px !important;
+	position: relative !important;
+}
+.tex_popup_lateral_esquerda{
+	border-top-left-radius: 0 !important;
+}
+.red_carpet.red_carpet_total{
+	left:10px !important;
+	position: relative !important;
+	border-bottom-width: 2px !important;
+    border-bottom-right-radius: 5px;
+}
+.tex_popup_total{
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+	z-index: 101;
+    border-top-width: 0 !important;
+}
+.tex_popup_lateral_direita {
+    right: 0 !important;
+}
+
+.tex_popup dd {
+    font-family: 'PT Serif', serif;
+    font-family: 'VT323', monospace;
+    // font: 1em VT323,Monaco,andale mono,courier new,Courier,monospace;
+    color: var(--secondary-low);
+    margin: 5px; // arruma a margem em volta do código, pra ficar centralizado (sem isso herdava uns valores malucos)
+}
+.red_carpet.red_carpet_lateral_direita {
+    right: 10px !important;
+}
+
+span.tex3_warning {
+    float: right;
+    font-size: .8em;
+    padding-right: 5px;
+}
+
+// Classe só pra fazer o overflow visible quando a equação é maior que a tela
+.show_full_equation {
+    overflow: visible !important;
+}
+// Esse é pra arrumar quando um usuário usa \tag{} dentro do TeX
+.MathJax.MathJax_FullWidth {
+    width: auto !important;
+    display: inline-block !important;
+}
