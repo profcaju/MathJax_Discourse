@@ -214,10 +214,10 @@
             espaco = $(this).closest('.cooked');
             // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
             elRight = $(this).offset().left + $(this).width();
-            console.log("size: " + $(this).width() + " eq: " +$(this).text());
+            //console.log("size: " + $(this).width() + " eq: " +$(this).text());
             if(elRight > espaco.width()) {
                $(this).addClass('eq_tapada');
-               console.log('eq_tapada');
+               //console.log('eq_tapada');
             } else {
                //console.log('VISÍVEL');
             }
