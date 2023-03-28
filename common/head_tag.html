@@ -210,26 +210,20 @@
     });
 
     MathJax.Hub.queue.Push(function () {
-        $('.Mathjax').each(function(el){
-                parent = el.parent().parent().parent();
+        $('.MathJax').each(function( el ) {
+                espaco = $(this).closest('.cooked');
                 // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
-                fora = parent[0].getBoundingClientRect();
-                eqRet = el[0].getBoundingClientRect();
-                comprimento = eqRet.right-eqRet.left;
-                altura = eqRet.bottom-eqRet.top;
-                //console.log('imagemH: ' + eqRet.left + ' ' + eqRet.right);
-                //console.log('imagemV: ' + eqRet.top + ' ' + eqRet.bottom);
-                //console.log("tamanho da imagem: " + comprimento + " por " + altura);
-                // verifica se eqRet tem alguma parte pra fora de fora
-                if(fora.right < eqRet.right || fora.left > eqRet.left ) {
-                   el.addClass('eq_tapada2');
-                   console.log('eq_tapada2');
+                elRight = $(this).offset().left + $(this).width();
+
+                if(elRight > espaco.width()) {
+                   $(this).addClass('eq_tapada');
+                   console.log('eq_tapada');
                 } else {
                    console.log('VISÍVEL');
                 }
                 console.log("\n");
         });
-    });
+});
 </script>
 
 <script>
