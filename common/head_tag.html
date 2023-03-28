@@ -209,7 +209,7 @@
     });
     });
 
-    MathJax.Hub.queue.Push(function () {
+    MathJax.Hub.Register.StartupHook("End",function () {
         $('.MathJax').each(function() {
                 espaco = $(this).closest('.cooked');
                 // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
