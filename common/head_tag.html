@@ -127,8 +127,6 @@
         el_id = "#" + message[1] + "-Frame";
         //el é a equação sendo adicionada na tela
         el = $(el_id);
-        math = el[0];
-        parent = el.parent().parent().parent();
               
         el.attr('unselectable','on')
             .css({'-moz-user-select':'-moz-none',
@@ -142,23 +140,6 @@
             .bind('selectstart', function(){ return false; })
             .hover(function(){$(this).css("cursor", "pointer")})
             .on("click", function(e){if(!e.shiftKey){tex_popup3(this);}});
-        
-        // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
-        fora = parent[0].getBoundingClientRect();
-        eqRet = el[0].getBoundingClientRect();
-        comprimento = eqRet.right-eqRet.left;
-        altura = eqRet.bottom-eqRet.top;
-        //console.log('imagemH: ' + eqRet.left + ' ' + eqRet.right);
-        //console.log('imagemV: ' + eqRet.top + ' ' + eqRet.bottom);
-        //console.log("tamanho da imagem: " + comprimento + " por " + altura);
-        // verifica se eqRet tem alguma parte pra fora de fora
-        if(fora.right < eqRet.right || fora.left > eqRet.left ) {
-           el.addClass('eq_tapada');
-           //console.log('eq_tapada');
-        } else {
-            //console.log('VISÍVEL');
-        }
-        console.log("\n");
     });
 
     MathJax.Hub.processSectionDelay = 0;
@@ -228,6 +209,27 @@
     });
     });
 
+    MathJax.Hub.queue.Push(function () {
+        $('.Mathjax').each(function(el){
+                parent = el.parent().parent().parent();
+                // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
+                fora = parent[0].getBoundingClientRect();
+                eqRet = el[0].getBoundingClientRect();
+                comprimento = eqRet.right-eqRet.left;
+                altura = eqRet.bottom-eqRet.top;
+                //console.log('imagemH: ' + eqRet.left + ' ' + eqRet.right);
+                //console.log('imagemV: ' + eqRet.top + ' ' + eqRet.bottom);
+                //console.log("tamanho da imagem: " + comprimento + " por " + altura);
+                // verifica se eqRet tem alguma parte pra fora de fora
+                if(fora.right < eqRet.right || fora.left > eqRet.left ) {
+                   el.addClass('eq_tapada2');
+                   console.log('eq_tapada2');
+                } else {
+                   console.log('VISÍVEL');
+                }
+                console.log("\n");
+        });
+    });
 </script>
 
 <script>
