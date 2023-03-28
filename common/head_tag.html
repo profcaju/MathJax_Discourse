@@ -129,12 +129,7 @@
         el = $(el_id);
         math = el[0];
         parent = el.parent().parent().parent();
-
-        //var script = MathJax.Hub.getJaxFor(message[1]).SourceElement();
-        //console.log('SCRIPT: ' + script.text);
-        //MathJax.HTML.addText(math,message.join(" ")+": '"+script.text+"'");
-        //MathJax.HTML.addElement(math,"br");
-                
+              
         el.attr('unselectable','on')
             .css({'-moz-user-select':'-moz-none',
                   '-moz-user-select':'none',
@@ -148,16 +143,16 @@
             .hover(function(){$(this).css("cursor", "pointer")})
             .on("click", function(e){if(!e.shiftKey){tex_popup3(this);}});
         
-        // limites de r1 (retângulo de fora) e r2 (retângulo da equação).
-        r1 = parent[0].getBoundingClientRect();
-        r2 = el[0].getBoundingClientRect();
-        comprimento = r2.right-r2.left;
-        altura = r2.bottom-r2.top;
-        //console.log('imagemH: ' + r2.left + ' ' + r2.right);
-        //console.log('imagemV: ' + r2.top + ' ' + r2.bottom);
+        // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
+        fora = parent[0].getBoundingClientRect();
+        eqRet = el[0].getBoundingClientRect();
+        comprimento = eqRet.right-eqRet.left;
+        altura = eqRet.bottom-eqRet.top;
+        //console.log('imagemH: ' + eqRet.left + ' ' + eqRet.right);
+        //console.log('imagemV: ' + eqRet.top + ' ' + eqRet.bottom);
         //console.log("tamanho da imagem: " + comprimento + " por " + altura);
-        // verifica se r2 tem alguma parte pra fora de r1
-        if(r1.right < r2.right || r1.left > r2.left || r1.bottom < r2.bottom || r1.top > r2.top) {
+        // verifica se eqRet tem alguma parte pra fora de fora
+        if(fora.right < eqRet.right || fora.left > eqRet.left ) {
            el.addClass('eq_tapada');
            //console.log('eq_tapada');
         } else {
