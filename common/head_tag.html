@@ -210,7 +210,8 @@
     });
 
 //    MathJax.Hub.Register.MessageHook("End Process", function(){
-    MathJax.Hub.Queue(function () {
+//    MathJax.Hub.Queue(function () {
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
         setTimeout(() => {
             $('.MathJax').each(function() {
                 espaco = $(this).closest('.cooked');
