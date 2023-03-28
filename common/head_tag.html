@@ -210,7 +210,7 @@
     });
 
     MathJax.Hub.queue.Push(function () {
-        $('.MathJax').each(function( ) {
+        $('.MathJax').each(function() {
                 espaco = $(this).closest('.cooked');
                 // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
                 elRight = $(this).offset().left + $(this).width();
@@ -219,7 +219,7 @@
                    $(this).addClass('eq_tapada');
                    console.log('eq_tapada');
                 } else {
-                   console.log('VISÍVEL');
+                   //console.log('VISÍVEL');
                 }
                 console.log("\n");
         });
