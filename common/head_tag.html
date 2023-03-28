@@ -211,18 +211,18 @@
 
     MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
         $('.MathJax').each(function() {
-                espaco = $(this).closest('.cooked');
-                // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
-                elRight = $(this).offset().left + $(this).width();
-
-                if(elRight > espaco.width()) {
-                   $(this).addClass('eq_tapada');
-                   console.log('eq_tapada');
-                } else {
-                   //console.log('VISÍVEL');
-                }
-                console.log("\n");
-        });
+            espaco = $(this).closest('.cooked');
+            // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
+            elRight = $(this).offset().left + $(this).width();
+            console.log("size: " + $(this).width() + " eq: " +$(this).text());
+            if(elRight > espaco.width()) {
+               $(this).addClass('eq_tapada');
+               console.log('eq_tapada');
+            } else {
+               //console.log('VISÍVEL');
+            }
+            console.log("\n");
+    });
 });
 </script>
 
