@@ -209,14 +209,6 @@
             }
         });
     });
-
-//    MathJax.Hub.Startup.signal.Interest(
-//        function (message) {console.log("Startup: "+message)}
-//    );
-//    MathJax.Hub.signal.Interest(
-//        function (message) {console.log("Hub: "+message)}
-//    );
-
 </script>
 
 <script type="text/discourse-plugin" version="0.11">
@@ -224,25 +216,26 @@
         if(opts?.widget?.dirtyKeys?.name === 'post-stream') {
             if(this?.cooking) clearTimeout(this.cooking);
             this.cooking = setTimeout(() => {
-                $('.MathJax').each(function() {
-                    espaco = $(this).closest('.cooked');
-                    // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
-                    elRight = $(this).offset().left + $(this).width();
-                    espacoRight = espaco.offset().left + espaco.width();
-                    //console.log("size: " + $(this).width() + " eq: " +$(this).text());
-                    if(elRight > espacoRight) {
-                       $(this).addClass('eq_tapada');
-                       console.log('eq_tapada');
-                    } else {
-                       //console.log('VISÍVEL');
-                    }
-                    //console.log("\n");
-                });
-            }, "1000");
+                setTimeout(() => {
+                    $('.MathJax').each(function() {
+                        espaco = $(this).closest('.cooked');
+                        // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
+                        elRight = $(this).offset().left + $(this).width();
+                        espacoRight = espaco.offset().left + espaco.width();
+                        //console.log("size: " + $(this).width() + " eq: " +$(this).text());
+                        if(elRight > espacoRight) {
+                           $(this).addClass('eq_tapada');
+                           console.log('eq_tapada');
+                        } else {
+                           //console.log('VISÍVEL');
+                        }
+                        //console.log("\n");
+                    });
+                }, "1000");
+            });
         }
     });
 </script>
-
 
 <script>
 function tex_popup3(equacao) {
