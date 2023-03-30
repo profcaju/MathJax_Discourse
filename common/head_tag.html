@@ -234,7 +234,7 @@
 
 <script>
 function tex_popup3(equacao) {
-    console.time("Tempo Total");
+    // console.time("Tempo Total");
     codigo = $(equacao).prev(); // é a caixa com o código latex
     // $(equacao) é a equação renderizada pelo MathJax
     $(".codebox").not(codigo).hide(); //Apaga todos popups de código existentes, menos da equação que clicou
@@ -299,6 +299,6 @@ function tex_popup3(equacao) {
                 $('.cooked').toggleClass('show_full_equation',true);
             }
     }
-    console.timeEnd("Tempo Total");
+    // console.timeEnd("Tempo Total");
 }
 </script>
