@@ -184,34 +184,37 @@
         if (jax === "NativeMML" && !canUseMML) jax = CONFIG.prefer.other;
         return MathJax.Hub.setRenderer(jax);
     });
+// Aqui é pra fazer aparecer o hspace sem dimensão (default to px)
     MathJax.Hub.Register.StartupHook("TeX Jax Ready", function () {
-    var PARSE = MathJax.InputJax.TeX.Parse;
-    PARSE.Augment({
-        GetDimen: function (name) {
-        var dimen, match;
-        if (this.nextIsSpace()) {this.i++}
-        if (this.string.charAt(this.i) == '{') {
-            dimen = this.GetArgument(name);
-            match = dimen.match(/^\s*([-+]?(?:[.,]\d+|\d+(?:[.,]\d*)?))\s*(pt|em|ex|mu|px|mm|cm|in|pc)?\s*$/);
-        } else {
-            dimen = this.string.slice(this.i);
-            match = dimen.match(/^\s*([-+]?(?:[.,]\d+|\d+(?:[.,]\d*)?))\s*(pt|em|ex|mu|px|mm|cm|in|pc)? ?/);
-            if (match) {
-            this.i += match[0].length;
+        var PARSE = MathJax.InputJax.TeX.Parse;
+        PARSE.Augment({
+            GetDimen: function (name) {
+            var dimen, match;
+            if (this.nextIsSpace()) {this.i++}
+            if (this.string.charAt(this.i) == '{') {
+                dimen = this.GetArgument(name);
+                match = dimen.match(/^\s*([-+]?(?:[.,]\d+|\d+(?:[.,]\d*)?))\s*(pt|em|ex|mu|px|mm|cm|in|pc)?\s*$/);
+            } else {
+                dimen = this.string.slice(this.i);
+                match = dimen.match(/^\s*([-+]?(?:[.,]\d+|\d+(?:[.,]\d*)?))\s*(pt|em|ex|mu|px|mm|cm|in|pc)? ?/);
+                if (match) {
+                this.i += match[0].length;
+                }
             }
-        }
-        if (match) {
-            return match[1].replace(/,/, '.') + (match[2] || 'px');
-        }
-        TEX.Error(["MissingDimOrUnits",
-                    "Missing dimension or its units for %1",name]);
-        }
-    });
+            if (match) {
+                return match[1].replace(/,/, '.') + (match[2] || 'px');
+            }
+            TEX.Error(["MissingDimOrUnits",
+                        "Missing dimension or its units for %1",name]);
+            }
+        });
     });
 
-//    MathJax.Hub.Register.MessageHook("End Process", function(){
+      
+
 //    MathJax.Hub.Queue(function () {
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
+//    MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
+      MathJax.Hub.Register.MessageHook("End", function(){
         console.log("entrei no queue");
         setTimeout(() => {
             $('.MathJax').each(function() {
