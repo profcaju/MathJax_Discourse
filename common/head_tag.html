@@ -216,6 +216,7 @@
         if(opts?.widget?.dirtyKeys?.name === 'post-stream') {
             if(this?.cooking) clearTimeout(this.cooking);
             this.cooking = setTimeout(() => {
+                console.log("entrei zum");
                 setTimeout(() => {
                     $('.MathJax').each(function() {
                         espaco = $(this).closest('.cooked');
