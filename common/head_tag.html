@@ -210,15 +210,6 @@
         });
     });
 
-      
-
-//  MathJax.Hub.Queue(function () {
-//  MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
-//  MathJax.Hub.Register.StartupHook("End",function () {
-    MathJax.Hub.Register.MessageHook("End Process", function (message) {        
-
-    });
-
 //    MathJax.Hub.Startup.signal.Interest(
 //        function (message) {console.log("Startup: "+message)}
 //    );
@@ -226,29 +217,29 @@
 //        function (message) {console.log("Hub: "+message)}
 //    );
 
-
 </script>
-
 
 <script type="text/discourse-plugin" version="0.11">
     api.decorateCookedElement((callback, opts) => {
-        console.log("entrei no queue");
-        setTimeout(() => {
-            $('.MathJax').each(function() {
-                espaco = $(this).closest('.cooked');
-                // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
-                elRight = $(this).offset().left + $(this).width();
-                espacoRight = espaco.offset().left + espaco.width();
-                //console.log("size: " + $(this).width() + " eq: " +$(this).text());
-                if(elRight > espacoRight) {
-                   $(this).addClass('eq_tapada');
-                   console.log('eq_tapada');
-                } else {
-                   //console.log('VISÍVEL');
-                }
-                //console.log("\n");
-            });
-        }, "1000");
+        if(opts?.widget?.dirtyKeys?.name === 'post-stream') {
+            if(this?.cooking) clearTimeout(this.cooking);
+            this.cooking = setTimeout(() => {
+                $('.MathJax').each(function() {
+                    espaco = $(this).closest('.cooked');
+                    // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
+                    elRight = $(this).offset().left + $(this).width();
+                    espacoRight = espaco.offset().left + espaco.width();
+                    //console.log("size: " + $(this).width() + " eq: " +$(this).text());
+                    if(elRight > espacoRight) {
+                       $(this).addClass('eq_tapada');
+                       console.log('eq_tapada');
+                    } else {
+                       //console.log('VISÍVEL');
+                    }
+                    //console.log("\n");
+                });
+            }, "1000");
+        }
     });
 </script>
 
