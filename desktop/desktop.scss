@@ -1,15 +1,15 @@
 // .MathJax:hover {
 //     outline: 1px dashed black;
 //     border-radius: 5px;
-//     
+//
 // }
 
-.MathJax:hover{
+.MathJax:hover {
     background-color: var(--primary-low);
 }
 
 .MathJax:hover:after {
-    content: '';
+    content: "";
     position: absolute;
     top: -5px;
     left: -5px;
@@ -24,7 +24,7 @@
     border-radius: 0 !important;
 }
 
-.MathJax.red_carpet:hover:before{
+.MathJax.red_carpet:hover:before {
     content: "";
     border: 0;
 }
