@@ -212,9 +212,9 @@
 
       
 
-//    MathJax.Hub.Queue(function () {
-//    MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
-      MathJax.Hub.Register.MessageHook("End", function(){
+//  MathJax.Hub.Queue(function () {
+//  MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
+    MathJax.Hub.Register.StartupHook("End",function () {
         console.log("entrei no queue");
         setTimeout(() => {
             $('.MathJax').each(function() {
