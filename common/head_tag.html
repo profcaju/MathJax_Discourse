@@ -210,8 +210,8 @@
     });
 
 //    MathJax.Hub.Register.MessageHook("End Process", function(){
-//    MathJax.Hub.Queue(function () {
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
+//    MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
+      MathJax.Hub.Queue(function () {
         setTimeout(() => {
             $('.MathJax').each(function() {
                 espaco = $(this).closest('.cooked');
@@ -239,13 +239,13 @@ function tex_popup3(equacao) {
     $(".codebox").not(codigo).hide(); //Apaga todos popups de código existentes, menos da equação que clicou
     $(".MathJax").not($(equacao)).toggleClass("red_carpet", false); //Apaga todas equações red_carpets existentes, menos a eq. que clicou
     codigo_top = $(equacao).position().top + $(equacao).outerHeight();
-    console.log($(equacao));
-    console.log('esse é o id: ' + $(equacao).attr('id'));
+    // console.log($(equacao));
+    // console.log('esse é o id: ' + $(equacao).attr('id'));
 
     //I need to get the original Tex markup with $$ delimiters
     //once the Math gets rendered
     var math = MathJax.Hub.getAllJax($(equacao).parent()[0])[0];
-    console.log('math: ' + math);
+    console.log('math: ' + math.root.display);
     var text =  '$' + math.originalText + '$';
     if (math.root.display) text = '$' + text + '$';
 
