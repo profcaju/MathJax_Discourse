@@ -212,6 +212,7 @@
 //    MathJax.Hub.Register.MessageHook("End Process", function(){
 //    MathJax.Hub.Queue(function () {
       MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
+        console.log("entrei no queue");
         setTimeout(() => {
             $('.MathJax').each(function() {
                 espaco = $(this).closest('.cooked');
@@ -245,7 +246,7 @@ function tex_popup3(equacao) {
     //I need to get the original Tex markup with $$ delimiters
     //once the Math gets rendered
     var math = MathJax.Hub.getAllJax($(equacao).parent()[0])[0];
-    console.log('math: ' + math.root.display);
+    // console.log('math: ' + math.root.display);
     var text =  '$' + math.originalText + '$';
     if (math.root.display) text = '$' + text + '$';
 
