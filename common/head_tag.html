@@ -216,6 +216,22 @@
 //  MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
 //  MathJax.Hub.Register.StartupHook("End",function () {
     MathJax.Hub.Register.MessageHook("End Process", function (message) {        
+
+    });
+
+//    MathJax.Hub.Startup.signal.Interest(
+//        function (message) {console.log("Startup: "+message)}
+//    );
+//    MathJax.Hub.signal.Interest(
+//        function (message) {console.log("Hub: "+message)}
+//    );
+
+
+</script>
+
+
+<script type="text/discourse-plugin" version="0.11">
+    api.decorateCookedElement((callback, opts) => {
         console.log("entrei no queue");
         setTimeout(() => {
             $('.MathJax').each(function() {
@@ -233,27 +249,6 @@
                 //console.log("\n");
             });
         }, "1000");
-    });
-
-//    MathJax.Hub.Startup.signal.Interest(
-//        function (message) {console.log("Startup: "+message)}
-//    );
-//    MathJax.Hub.signal.Interest(
-//        function (message) {console.log("Hub: "+message)}
-//    );
-
-
-</script>
-
-
-<script type="text/discourse-plugin" version="0.11">
-    api.decorateCookedElement((callback, opts) => {
-        if(opts?.widget?.dirtyKeys?.name === 'post-stream') {
-            if(this?.cooking) clearTimeout(this.cooking);
-            this.cooking = setTimeout(() => {
-                console.log('All cooking is done, update new content..');
-            });
-        }
     });
 </script>
 
