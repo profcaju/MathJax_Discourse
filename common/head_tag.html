@@ -148,6 +148,7 @@
                     elRight = el.offset().left + el.width();
                     espacoRight = espaco.offset().left + espaco.width();
                     //console.log("size: " + el.width() + " eq: " +el.text());
+                    console.log("elRight: " + elRight + " espacoRight: " + espacoRight);
                     if(elRight > espacoRight) {
                        el.addClass('eq_tapada');
                        console.log('eq_tapada');
@@ -234,7 +235,7 @@
 //  MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
 //  MathJax.Hub.Register.StartupHook("End",function () {
     MathJax.Hub.Register.MessageHook("End Process", function (message) {        
-        console.log("entrei no queue");
+        
 
     });
 
