@@ -140,6 +140,24 @@
             .bind('selectstart', function(){ return false; })
             .hover(function(){$(this).css("cursor", "pointer")})
             .on("click", function(e){if(!e.shiftKey){tex_popup3(this);}});
+    
+            setTimeout(() => {
+//                $('.MathJax').each(function() {
+                    espaco = el.closest('.cooked');
+                    // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
+                    elRight = el.offset().left + el.width();
+                    espacoRight = espaco.offset().left + espaco.width();
+                    //console.log("size: " + el.width() + " eq: " +el.text());
+                    if(elRight > espacoRight) {
+                       el.addClass('eq_tapada');
+                       console.log('eq_tapada');
+                    } else {
+                       //console.log('VISÍVEL');
+                    }
+                    //console.log("\n");
+//                });
+            }, "1000");
+    
     });
 
     MathJax.Hub.processSectionDelay = 0;
@@ -217,22 +235,7 @@
 //  MathJax.Hub.Register.StartupHook("End",function () {
     MathJax.Hub.Register.MessageHook("End Process", function (message) {        
         console.log("entrei no queue");
-        setTimeout(() => {
-            $('.MathJax').each(function() {
-                espaco = $(this).closest('.cooked');
-                // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
-                elRight = $(this).offset().left + $(this).width();
-                espacoRight = espaco.offset().left + espaco.width();
-                //console.log("size: " + $(this).width() + " eq: " +$(this).text());
-                if(elRight > espacoRight) {
-                   $(this).addClass('eq_tapada');
-                   console.log('eq_tapada');
-                } else {
-                   //console.log('VISÍVEL');
-                }
-                //console.log("\n");
-            });
-        }, "1000");
+
     });
 
     MathJax.Hub.Startup.signal.Interest(
