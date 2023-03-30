@@ -236,10 +236,10 @@
     });
 
     MathJax.Hub.Startup.signal.Interest(
-        function (message) {alert("Startup: "+message)}
+        function (message) {console.log("Startup: "+message)}
     );
     MathJax.Hub.signal.Interest(
-        function (message) {alert("Hub: "+message)}
+        function (message) {console.log("Hub: "+message)}
     );
 
 
