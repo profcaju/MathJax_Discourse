@@ -245,6 +245,19 @@
 
 </script>
 
+
+<script type="text/discourse-plugin" version="0.11">
+    api.decorateCookedElement((callback, opts) => {
+        if(opts?.widget?.dirtyKeys?.name === 'post-stream') {
+            if(this?.cooking) clearTimeout(this.cooking);
+            this.cooking = setTimeout(() => {
+                console.log('All cooking is done, update new content..');
+            });
+        }
+    });
+</script>
+
+
 <script>
 function tex_popup3(equacao) {
     // console.time("Tempo Total");
