@@ -218,14 +218,14 @@
             this.cooking = setTimeout(() => {
                 console.log("entrei zum");
                 setTimeout(() => {
-                    $('.MathJax').each(function() {
-                        espaco = $(this).closest('.cooked');
+                    $('.MathJax').each(function(el) {
+                        espaco = $(el).closest('.cooked');
                         // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
-                        elRight = $(this).offset().left + $(this).width();
+                        elRight = $(el).offset().left + $(el).width();
                         espacoRight = espaco.offset().left + espaco.width();
-                        //console.log("size: " + $(this).width() + " eq: " +$(this).text());
+                        //console.log("size: " + $(el).width() + " eq: " +$(el).text());
                         if(elRight > espacoRight) {
-                           $(this).addClass('eq_tapada');
+                           $(el).addClass('eq_tapada');
                            console.log('eq_tapada');
                         } else {
                            //console.log('VISÍVEL');
