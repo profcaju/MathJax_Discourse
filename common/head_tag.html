@@ -126,8 +126,8 @@
         },
     });
 
-    MathJax.Hub.Register.MessageHook("End Process", function (message) {
-        //eq_tapada();
+    MathJax.Hub.Register.StartupHook("End Process", function (message) {
+        eq_tapada();
     });
 
     // Signal "New Math" é enviado cada vez que uma nova equação é parseada na tela pelo MathJax.
