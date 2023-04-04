@@ -261,6 +261,7 @@
         window.clearTimeout(timerNewMath);
         console.log("iniciei o timer");
         timerNewMath = window.setTimeout(() => {
+            console.log("Executei \n");
             $(".MathJax").each(function () {
                 espaco = $(this).closest(".cooked");
                 // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
@@ -273,7 +274,6 @@
                 } else {
                     //console.log('VISÍVEL');
                 }
-                console.log("Executei \n");
             });
         }, "1000");
     }
