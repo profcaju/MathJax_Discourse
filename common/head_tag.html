@@ -127,7 +127,7 @@
     });
 
     MathJax.Hub.Register.MessageHook("End Process", function (message) {
-        eq_tapada();
+        //eq_tapada();
     });
 
     // Signal "New Math" é enviado cada vez que uma nova equação é parseada na tela pelo MathJax.
@@ -285,7 +285,8 @@
                 if (this?.cooking) clearTimeout(this.cooking);
                 this.cooking = setTimeout(() => {
                     console.log("All cooking is done, update new content..");
-                    sessionStorage.setItem("wait", false);
+                    eq_tapada();
+                    // sessionStorage.setItem("wait", false);
                 });
             }
         },
