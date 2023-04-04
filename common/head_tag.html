@@ -126,6 +126,10 @@
         },
     });
 
+    MathJax.Hub.Register.MessageHook("End Process", function (message) {
+        eq_tapada();
+    }
+
     // Signal "New Math" é enviado cada vez que uma nova equação é parseada na tela pelo MathJax.
     // Daí arrumo o CSS dela e coloco a função para clicar e aparecer o preview
     // E também verifico se ela vai ser maior do que o espaço dela (pra aparecer o "clique para ver inteira")
@@ -155,7 +159,6 @@
                     tex_popup3(this);
                 }
             });
-            eq_tapada();
     });
 
     MathJax.Hub.processSectionDelay = 0;
