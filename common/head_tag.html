@@ -246,13 +246,17 @@
     MathJax.Hub.Register.StartupHook("End", function () {
         eq_tapada();
     });
+    mathjaxSignals();
 
-    //    MathJax.Hub.Startup.signal.Interest(function (message) {
-    //        console.log("Startup: " + message);
-    //    });
-    //    MathJax.Hub.signal.Interest(function (message) {
-    //        console.log("Hub: " + message);
-    //    });
+    function mathjaxSignals() {
+        MathJax.Hub.Startup.signal.Interest(function (message) {
+            console.log("Startup: " + message);
+        });
+        MathJax.Hub.signal.Interest(function (message) {
+            console.log("Hub: " + message);
+        });
+    }
+
     function eq_tapada() {
         window.clearTimeout(timerNewMath);
         timerNewMath = window.setTimeout(() => {
