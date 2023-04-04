@@ -235,12 +235,12 @@
             }, "1000");
         });
 
-    //    MathJax.Hub.Startup.signal.Interest(
-    //        function (message) {console.log("Startup: "+message)}
-    //    );
-    //    MathJax.Hub.signal.Interest(
-    //        function (message) {console.log("Hub: "+message)}
-    //    );
+        MathJax.Hub.Startup.signal.Interest(
+            function (message) {console.log("Startup: "+message)}
+        );
+        MathJax.Hub.signal.Interest(
+            function (message) {console.log("Hub: "+message)}
+        );
 </script>
 
 <script type="text/discourse-plugin" version="0.11">
