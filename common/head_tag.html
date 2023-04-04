@@ -250,8 +250,9 @@
     MathJax.Hub.Register.StartupHook("End", function () {
         eq_tapada();
     });
-    mathjaxSignals();
+    // mathjaxSignals();
 
+    // Mostra no console todos os sinais enviados pelo MathJax
     function mathjaxSignals() {
         MathJax.Hub.Startup.signal.Interest(function (message) {
             console.log("Startup: " + message);
