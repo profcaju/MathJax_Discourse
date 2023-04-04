@@ -1,254 +1,251 @@
 <script type="text/x-mathjax-config">
-        var timerNewMath;
-        MathJax.Hub.PreProcess.disabled = true;
+    var timerNewMath;
+    MathJax.Hub.PreProcess.disabled = true;
 
-        MathJax.Hub.Config({
-            "HTML-CSS": {
-                scale: 95,
-                styles: {
-                    ".MathJax": {
-                        padding: "4px 0",
-                        display: "inline-block !important",
-                    },
-                },
-                preview: ["[carregando equação]"],
-            },
-            CHTML: {
-                scale: 95,
-                styles: {
-                    ".MathJax": {
-                        padding: "4px 0",
-                        display: "inline-block !important",
-                    },
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            scale: 95,
+            styles: {
+                ".MathJax": {
+                    padding: "4px 0",
+                    display: "inline-block !important",
                 },
             },
-            SVG: {
-                scale: 95,
-                styles: {
-                    ".MathJax": {
-                        padding: "4px 0",
-                        display: "inline-block !important",
-                    },
+            preview: ["[carregando equação]"],
+        },
+        CHTML: {
+            scale: 95,
+            styles: {
+                ".MathJax": {
+                    padding: "4px 0",
+                    display: "inline-block !important",
                 },
             },
+        },
+        SVG: {
+            scale: 95,
+            styles: {
+                ".MathJax": {
+                    padding: "4px 0",
+                    display: "inline-block !important",
+                },
+            },
+        },
 
-            menuSettings: {
-                zoom: "Click", //  when to do MathZoom
-                CTRL: false, //    require CTRL for MathZoom?
-                ALT: false, //    require Alt or Option?
-                CMD: false, //    require CMD?
-                Shift: true, //    require Shift?
-                discoverable: false, //  make math menu discoverable on hover?
-                zscale: "200%", //  the scaling factor for MathZoom
-                renderer: null, //  set when Jax are loaded
-                font: "Auto", //  what font HTML-CSS should use
-                context: "Browser", //  or "Browser" for pass-through to browser menu
-                locale: "pt-br", //  the language to use for messages
-                mpContext: false, //  true means pass menu events to MathPlayer in IE
-                mpMouse: false, //  true means pass mouse events to MathPlayer in IE
-                texHints: true, //  include class names for TeXAtom elements
-                FastPreview: false, //  use PreviewHTML output as preview?
-                assistiveMML: true, //  include hidden MathML for screen readers?
-                inTabOrder: false, //  set to true if math elements should be included in the tabindex
-                semantics: false, //  add semantics tag with original form in MathML output
+        menuSettings: {
+            zoom: "Click", //  when to do MathZoom
+            CTRL: false, //    require CTRL for MathZoom?
+            ALT: false, //    require Alt or Option?
+            CMD: false, //    require CMD?
+            Shift: true, //    require Shift?
+            discoverable: false, //  make math menu discoverable on hover?
+            zscale: "200%", //  the scaling factor for MathZoom
+            renderer: null, //  set when Jax are loaded
+            font: "Auto", //  what font HTML-CSS should use
+            context: "Browser", //  or "Browser" for pass-through to browser menu
+            locale: "pt-br", //  the language to use for messages
+            mpContext: false, //  true means pass menu events to MathPlayer in IE
+            mpMouse: false, //  true means pass mouse events to MathPlayer in IE
+            texHints: true, //  include class names for TeXAtom elements
+            FastPreview: false, //  use PreviewHTML output as preview?
+            assistiveMML: true, //  include hidden MathML for screen readers?
+            inTabOrder: false, //  set to true if math elements should be included in the tabindex
+            semantics: false, //  add semantics tag with original form in MathML output
+        },
+        MathMenu: {
+            delay: 500,
+            showLocale: false,
+            showMathPlayer: false,
+        },
+        tex2jax: {
+            //          inlineMath: [ ['\[tex3\]','\[\/tex3\]'] ],
+            processEnvironments: false,
+            preview: ["[carregando equação]"],
+            processEscapes: true,
+        },
+        jsMath2jax: {
+            preview: ["[carregando equação]"],
+        },
+        mml2jax: {
+            preview: ["[carregando equação]"],
+        },
+        asciimath2jax: {
+            preview: ["[carregando equação]"],
+        },
+        TeX: {
+            extensions: [
+                "AMSmath.js",
+                "AMSsymbols.js",
+                "noErrors.js",
+                "noUndefined.js",
+                "begingroup.js",
+                "autobold.js",
+                "[Contrib]/sqrtspacing/sqrtspacing.js",
+            ],
+            noErrors: {
+                disabled: true,
             },
-            MathMenu: {
-                delay: 500,
-                showLocale: false,
-                showMathPlayer: false,
+            Macros: {
+                sen: ["\\operatorname\{sen\}"],
+                tg: ["\\operatorname\{tg\}"],
+                cotg: ["\\operatorname\{cotg\}"],
+                cossec: ["\\operatorname\{cossec\}"],
+                cosec: ["\\operatorname\{cosec\}"],
+                arctg: ["\\operatorname\{arctg\}"],
+                arcotg: ["\\operatorname\{arcotg\}"],
+                arccotg: ["\\operatorname\{arccotg\}"],
+                arcsen: ["\\operatorname\{arcsen\}"],
+                cis: ["\\operatorname\{cis\}"],
+                rad: ["\\operatorname\{rad\}"],
+                arcsenh: ["\\operatorname\{arcsenh\}"],
+                arccosh: ["\\operatorname\{arccosh\}"],
+                MDC: ["\\operatorname\{MDC\}"],
+                mdc: ["\\operatorname\{MDC\}"],
+                mod: ["\\operatorname\{mod\}"],
+                mol: ["\\operatorname\{mol\}"],
+                micro: ["\\mu"],
+                "(": ["\\left\("],
+                ")": ["\\right\)"],
+                "[": ["\\left\["],
+                "]": ["\\right\]"],
+                Scorpio: ["♏"],
+                molaridade: ["♏"],
+                ohm: ["\\Omega"],
+                celsius: ["º C"],
+                degree: ["º"],
+                degrees: ["º"],
             },
-            tex2jax: {
-                //          inlineMath: [ ['\[tex3\]','\[\/tex3\]'] ],
-                processEnvironments: false,
-                preview: ["[carregando equação]"],
-                processEscapes: true,
-            },
-            jsMath2jax: {
-                preview: ["[carregando equação]"],
-            },
-            mml2jax: {
-                preview: ["[carregando equação]"],
-            },
-            asciimath2jax: {
-                preview: ["[carregando equação]"],
-            },
-            TeX: {
-                extensions: [
-                    "AMSmath.js",
-                    "AMSsymbols.js",
-                    "noErrors.js",
-                    "noUndefined.js",
-                    "begingroup.js",
-                    "autobold.js",
-                    "[Contrib]/sqrtspacing/sqrtspacing.js",
-                ],
-                noErrors: {
-                    disabled: true,
+            mathsize: "90%",
+            noUndefined: {
+                attributes: {
+                    mathcolor: "white",
+                    mathbackground: "red",
+                    mathsize: "90%",
                 },
-                Macros: {
-                    sen: ["\\operatorname\{sen\}"],
-                    tg: ["\\operatorname\{tg\}"],
-                    cotg: ["\\operatorname\{cotg\}"],
-                    cossec: ["\\operatorname\{cossec\}"],
-                    cosec: ["\\operatorname\{cosec\}"],
-                    arctg: ["\\operatorname\{arctg\}"],
-                    arcotg: ["\\operatorname\{arcotg\}"],
-                    arccotg: ["\\operatorname\{arccotg\}"],
-                    arcsen: ["\\operatorname\{arcsen\}"],
-                    cis: ["\\operatorname\{cis\}"],
-                    rad: ["\\operatorname\{rad\}"],
-                    arcsenh: ["\\operatorname\{arcsenh\}"],
-                    arccosh: ["\\operatorname\{arccosh\}"],
-                    MDC: ["\\operatorname\{MDC\}"],
-                    mdc: ["\\operatorname\{MDC\}"],
-                    mod: ["\\operatorname\{mod\}"],
-                    mol: ["\\operatorname\{mol\}"],
-                    micro: ["\\mu"],
-                    "(": ["\\left\("],
-                    ")": ["\\right\)"],
-                    "[": ["\\left\["],
-                    "]": ["\\right\]"],
-                    Scorpio: ["♏"],
-                    molaridade: ["♏"],
-                    ohm: ["\\Omega"],
-                    celsius: ["º C"],
-                    degree: ["º"],
-                    degrees: ["º"],
-                },
-                mathsize: "90%",
-                noUndefined: {
-                    attributes: {
-                        mathcolor: "white",
-                        mathbackground: "red",
-                        mathsize: "90%",
-                    },
-                },
             },
-        });
+        },
+    });
 
-        // Signal "New Math" é enviado cada vez que uma nova equação é parseada na tela pelo MathJax.
-        // Daí arrumo o CSS dela e coloco a função para clicar e aparecer o preview
-        // E também verifico se ela vai ser maior do que o espaço dela (pra aparecer o "clique para ver inteira")
-        MathJax.Hub.Register.MessageHook("New Math", function (message) {
-            el_id = "#" + message[1] + "-Frame";
-            //el é a equação sendo adicionada na tela
-            el = $(el_id);
+    // Signal "New Math" é enviado cada vez que uma nova equação é parseada na tela pelo MathJax.
+    // Daí arrumo o CSS dela e coloco a função para clicar e aparecer o preview
+    // E também verifico se ela vai ser maior do que o espaço dela (pra aparecer o "clique para ver inteira")
+    MathJax.Hub.Register.MessageHook("New Math", function (message) {
+        el_id = "#" + message[1] + "-Frame";
+        //el é a equação sendo adicionada na tela
+        el = $(el_id);
 
-            el.attr("unselectable", "on")
-                .css({
-                    "-moz-user-select": "-moz-none",
-                    "-moz-user-select": "none",
-                    "-o-user-select": "none",
-                    "-khtml-user-select": "none",
-                    "-webkit-user-select": "none",
-                    "-ms-user-select": "none",
-                    "user-select": "none",
-                })
-                .bind("selectstart", function () {
-                    return false;
-                })
-                .hover(function () {
-                    $(this).css("cursor", "pointer");
-                })
-                .on("click", function (e) {
-                    if (!e.shiftKey) {
-                        tex_popup3(this);
-                    }
-                });
-        });
-
-        MathJax.Hub.processSectionDelay = 0;
-        MathJax.Hub.Register.StartupHook("TeX Jax Ready", function () {
-            MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros, {
-                cancel: ["Extension", "cancel"],
-                bcancel: ["Extension", "cancel"],
-                xcancel: ["Extension", "cancel"],
-                cancelto: ["Extension", "cancel"],
-                color: ["Extension", "color"],
+        el.attr("unselectable", "on")
+            .css({
+                "-moz-user-select": "-moz-none",
+                "-moz-user-select": "none",
+                "-o-user-select": "none",
+                "-khtml-user-select": "none",
+                "-webkit-user-select": "none",
+                "-ms-user-select": "none",
+                "user-select": "none",
+            })
+            .bind("selectstart", function () {
+                return false;
+            })
+            .hover(function () {
+                $(this).css("cursor", "pointer");
+            })
+            .on("click", function (e) {
+                if (!e.shiftKey) {
+                    tex_popup3(this);
+                }
             });
+    });
 
-            // O código abaixo é para deixar todas expressões matemáticas
-            // como displaystyle, ou seja, não diminuir a fonte por ser inline.
-            // Fonte: https://groups.google.com/forum/#!topic/mathjax-users/licbps4hk4U
-            var TEX = MathJax.InputJax.TeX;
-            var PREFILTER = TEX.prefilterMath;
-            TEX.Augment({
-                prefilterMath: function (math, displaymode, script) {
-                    math = "\\displaystyle\{\{" + math + "\}\}";
-                    return PREFILTER.call(TEX, math, displaymode, script);
-                },
-            });
+    MathJax.Hub.processSectionDelay = 0;
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready", function () {
+        MathJax.Hub.Insert(MathJax.InputJax.TeX.Definitions.macros, {
+            cancel: ["Extension", "cancel"],
+            bcancel: ["Extension", "cancel"],
+            xcancel: ["Extension", "cancel"],
+            cancelto: ["Extension", "cancel"],
+            color: ["Extension", "color"],
         });
 
-        MathJax.Hub.Register.StartupHook("End Jax", function () {
-            var BROWSER = MathJax.Hub.Browser;
-            var canUseMML =
-                (BROWSER.isFirefox && BROWSER.versionAtLeast("1.5")) ||
-                (BROWSER.isMSIE && BROWSER.hasMathPlayer) ||
-                (BROWSER.isSafari && BROWSER.versionAtLeast("5.0")) ||
-                (BROWSER.isOpera &&
-                    BROWSER.versionAtLeast("9.52") &&
-                    !BROWSER.versionAtLeast("14.0"));
-            var CONFIG = MathJax.Hub.CombineConfig("MMLorHTML", {
-                prefer: {
-                    MSIE: "MML",
-                    Firefox: "HTML",
-                    Opera: "HTML",
-                    Chrome: "HTML",
-                    Safari: "HTML",
-                    other: "HTML",
-                },
-            });
-            var jax = CONFIG.prefer[BROWSER] || CONFIG.prefer.other;
-            if (jax === "HTML") jax = "HTML-CSS";
-            else if (jax === "MML") jax = "NativeMML";
-            if (jax === "NativeMML" && !canUseMML) jax = CONFIG.prefer.other;
-            return MathJax.Hub.setRenderer(jax);
+        // O código abaixo é para deixar todas expressões matemáticas
+        // como displaystyle, ou seja, não diminuir a fonte por ser inline.
+        // Fonte: https://groups.google.com/forum/#!topic/mathjax-users/licbps4hk4U
+        var TEX = MathJax.InputJax.TeX;
+        var PREFILTER = TEX.prefilterMath;
+        TEX.Augment({
+            prefilterMath: function (math, displaymode, script) {
+                math = "\\displaystyle\{\{" + math + "\}\}";
+                return PREFILTER.call(TEX, math, displaymode, script);
+            },
         });
-        // Aqui é pra fazer aparecer o hspace sem dimensão (default to px)
-        MathJax.Hub.Register.StartupHook("TeX Jax Ready", function () {
-            var PARSE = MathJax.InputJax.TeX.Parse;
-            PARSE.Augment({
-                GetDimen: function (name) {
-                    var dimen, match;
-                    if (this.nextIsSpace()) {
-                        this.i++;
-                    }
-                    if (this.string.charAt(this.i) == "{") {
-                        dimen = this.GetArgument(name);
-                        match = dimen.match(
-                            /^\s*([-+]?(?:[.,]\d+|\d+(?:[.,]\d*)?))\s*(pt|em|ex|mu|px|mm|cm|in|pc)?\s*$/
-                        );
-                    } else {
-                        dimen = this.string.slice(this.i);
-                        match = dimen.match(
-                            /^\s*([-+]?(?:[.,]\d+|\d+(?:[.,]\d*)?))\s*(pt|em|ex|mu|px|mm|cm|in|pc)? ?/
-                        );
-                        if (match) {
-                            this.i += match[0].length;
-                        }
-                    }
+    });
+
+    MathJax.Hub.Register.StartupHook("End Jax", function () {
+        var BROWSER = MathJax.Hub.Browser;
+        var canUseMML =
+            (BROWSER.isFirefox && BROWSER.versionAtLeast("1.5")) ||
+            (BROWSER.isMSIE && BROWSER.hasMathPlayer) ||
+            (BROWSER.isSafari && BROWSER.versionAtLeast("5.0")) ||
+            (BROWSER.isOpera &&
+                BROWSER.versionAtLeast("9.52") &&
+                !BROWSER.versionAtLeast("14.0"));
+        var CONFIG = MathJax.Hub.CombineConfig("MMLorHTML", {
+            prefer: {
+                MSIE: "MML",
+                Firefox: "HTML",
+                Opera: "HTML",
+                Chrome: "HTML",
+                Safari: "HTML",
+                other: "HTML",
+            },
+        });
+        var jax = CONFIG.prefer[BROWSER] || CONFIG.prefer.other;
+        if (jax === "HTML") jax = "HTML-CSS";
+        else if (jax === "MML") jax = "NativeMML";
+        if (jax === "NativeMML" && !canUseMML) jax = CONFIG.prefer.other;
+        return MathJax.Hub.setRenderer(jax);
+    });
+    // Aqui é pra fazer aparecer o hspace sem dimensão (default to px)
+    MathJax.Hub.Register.StartupHook("TeX Jax Ready", function () {
+        var PARSE = MathJax.InputJax.TeX.Parse;
+        PARSE.Augment({
+            GetDimen: function (name) {
+                var dimen, match;
+                if (this.nextIsSpace()) {
+                    this.i++;
+                }
+                if (this.string.charAt(this.i) == "{") {
+                    dimen = this.GetArgument(name);
+                    match = dimen.match(
+                        /^\s*([-+]?(?:[.,]\d+|\d+(?:[.,]\d*)?))\s*(pt|em|ex|mu|px|mm|cm|in|pc)?\s*$/
+                    );
+                } else {
+                    dimen = this.string.slice(this.i);
+                    match = dimen.match(
+                        /^\s*([-+]?(?:[.,]\d+|\d+(?:[.,]\d*)?))\s*(pt|em|ex|mu|px|mm|cm|in|pc)? ?/
+                    );
                     if (match) {
-                        return match[1].replace(/,/, ".") + (match[2] || "px");
+                        this.i += match[0].length;
                     }
-                    TEX.Error([
-                        "MissingDimOrUnits",
-                        "Missing dimension or its units for %1",
-                        name,
-                    ]);
-                },
-            });
+                }
+                if (match) {
+                    return match[1].replace(/,/, ".") + (match[2] || "px");
+                }
+                TEX.Error([
+                    "MissingDimOrUnits",
+                    "Missing dimension or its units for %1",
+                    name,
+                ]);
+            },
         });
+    });
 
-        //  MathJax.Hub.Queue(function () {
-        //  MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
-        //  MathJax.Hub.Register.MessageHook("End Process", function (message) {
-        MathJax.Hub.Register.StartupHook("End", function () {
-            console.log("entrei no queue");
-            setTimeout(() => {
-                eq_tapada();
-            }, "1000");
-        });
+    //  MathJax.Hub.Queue(function () {
+    //  MathJax.Hub.Queue(["Typeset", MathJax.Hub], function(){
+    //  MathJax.Hub.Register.MessageHook("End Process", function (message) {
+    MathJax.Hub.Register.StartupHook("End", function () {
+        eq_tapada();
+    });
 
     //    MathJax.Hub.Startup.signal.Interest(function (message) {
     //        console.log("Startup: " + message);
@@ -256,21 +253,25 @@
     //    MathJax.Hub.signal.Interest(function (message) {
     //        console.log("Hub: " + message);
     //    });
-    function eq_tapada(){
-        $(".MathJax").each(function () {
-            espaco = $(this).closest(".cooked");
-            // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
-            elRight = $(this).offset().left + $(this).width();
-            espacoRight = espaco.offset().left + espaco.width();
-            //console.log("size: " + $(this).width() + " eq: " +$(this).text());
-            if (elRight > espacoRight) {
-                $(this).addClass("eq_tapada");
-                console.log("eq_tapada");
-            } else {
-                //console.log('VISÍVEL');
-            }
-            //console.log("\n");
-        });
+    function eq_tapada() {
+        window.clearTimeout(timerNewMath);
+        timerNewMath = window.setTimeout(() => {
+            console.log("iniciei o timer");
+            $(".MathJax").each(function () {
+                espaco = $(this).closest(".cooked");
+                // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
+                elRight = $(this).offset().left + $(this).width();
+                espacoRight = espaco.offset().left + espaco.width();
+                //console.log("size: " + $(this).width() + " eq: " +$(this).text());
+                if (elRight > espacoRight) {
+                    $(this).addClass("eq_tapada");
+                    console.log("eq_tapada");
+                } else {
+                    //console.log('VISÍVEL');
+                }
+                console.log("Executei \n");
+            });
+        }, "1000");
     }
 </script>
 
