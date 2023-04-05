@@ -106,7 +106,7 @@ span.tex3_warning {
 .eq_tapada:before {
     position: relative;
     content: "👉";
-    background-color: blue;
+    background-color: lightgrey;
     border-radius: 5px;
     padding: 0 4px 0 2px;
     z-index: 10;
@@ -115,7 +115,7 @@ span.tex3_warning {
     text-align: right;
     font-family: Monaco;
     font-size: 10px;
-    width: 7em;
+    width: 2em;
     outline: 1px dashed white;
     outline-offset: 2px;
 }
