@@ -100,5 +100,20 @@ span.tex3_warning {
 
 // classe da equação que está saindo pra fora da tela
 .eq_tapada {
-    background-color: red;
+    width: calc(100%);
+    position: absolute;
+}
+.eq_tapada:before {
+    position: relative;
+    content: "continua 👉";
+    background-color: blue;
+    border-radius: 5px;
+    padding: 0 4px 0 2px;
+    z-index: 10;
+    width: 100%;
+    float: right;
+    text-align: right;
+    font-family: Monaco;
+    font-size: 10px;
+    width: 7em;
 }
