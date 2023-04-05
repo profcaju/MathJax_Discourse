@@ -269,7 +269,7 @@
                 //console.log("size: " + $(this).width() + " eq: " +$(this).text());
                 if (elRight > espacoRight) {
                     console.log($(this).parent());
-                    if (!$(this).siblings(".eq_tapada")) {
+                    if ($(this).siblings(".eq_tapada").length == 0) {
                         $("<div class='eq_tapada'></div>").insertBefore(this);
                     }
                     // $(this).addClass("eq_tapada");
