@@ -268,6 +268,7 @@
                 espacoRight = espaco.offset().left + espaco.width();
                 //console.log("size: " + $(this).width() + " eq: " +$(this).text());
                 if (elRight > espacoRight) {
+                    console.log($(this).parent().has(".eq_tapada"));
                     if (!$(this).parent().has(".eq_tapada")) {
                         $("<div class='eq_tapada'></div>").insertBefore(this);
                     }
