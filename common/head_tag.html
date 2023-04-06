@@ -1,3 +1,101 @@
+<script>
+    function tex_popup3(equacao) {
+        // console.time("Tempo Total");
+        codigo = $(equacao).prev(); // é a caixa com o código latex
+        // $(equacao) é a equação renderizada pelo MathJax
+        $(".codebox").not(codigo).hide(); //Apaga todos popups de código existentes, menos da equação que clicou
+        $(".MathJax").not($(equacao)).toggleClass("red_carpet", false); //Apaga todas equações red_carpets existentes, menos a eq. que clicou
+        codigo_top = $(equacao).position().top + $(equacao).outerHeight();
+        // console.log($(equacao));
+        // console.log('esse é o id: ' + $(equacao).attr('id'));
+
+        //I need to get the original Tex markup with $$ delimiters
+        //once the Math gets rendered
+        var math = MathJax.Hub.getAllJax($(equacao).parent()[0])[0];
+        // console.log('math: ' + math.root.display);
+        var text = "$" + math.originalText + "$";
+        if (math.root.display) text = "$" + text + "$";
+
+        if (!codigo.hasClass("codebox")) {
+            $(
+                "<dl class='codebox tex_popup tex_popup_lateral_esquerda' style='display: block;'> \
+            <dd> \
+                <code class='tex2jax_ignore'>" +
+                    text +
+                    "</code> \
+            </dd> \
+        </dl>"
+            )
+                .insertBefore(equacao)
+                .hide();
+            codigo = $(equacao).prev(); // é a caixa com o código latex (coloquei o código de novo para quando não está presente)
+        } else {
+            if (codigo.is(":visible")) {
+            }
+        }
+        codigo.css("top", codigo_top);
+        codigo.toggle();
+        $(equacao).toggleClass("red_carpet");
+        equacao_esquerda = $(equacao).offset().left;
+        codigo_esquerda = codigo.offset().left;
+        tamanho_codigo = codigo.outerWidth();
+        tamanho_equacao = $(equacao).outerWidth();
+        equacao_direita = $(equacao).offset().left + tamanho_equacao;
+        codigo_direita = codigo.offset().left + tamanho_codigo;
+
+        $(".MathJax").toggleClass("red_carpet_lateral_direita", false);
+        codigo.toggleClass("tex_popup_lateral_direita", false);
+        $(".MathJax").toggleClass("red_carpet_lateral_esquerda", false);
+        codigo.toggleClass("tex_popup_lateral_esquerda", false);
+        $(".MathJax").toggleClass("red_carpet_total", false);
+        codigo.toggleClass("tex_popup_total", false);
+        $(".cooked").toggleClass("show_full_equation", false);
+
+        if (tamanho_equacao < tamanho_codigo) {
+            if (equacao_esquerda < codigo_esquerda) {
+                $(equacao).toggleClass("red_carpet_lateral_esquerda", true);
+                codigo.toggleClass("tex_popup_lateral_esquerda", true);
+            }
+            if (equacao_direita + 5 > codigo_direita) {
+                $(equacao).toggleClass("red_carpet_lateral_direita", true);
+                codigo.toggleClass("tex_popup_lateral_direita", true);
+            }
+        } else {
+            $(equacao).toggleClass("red_carpet_total", true);
+            codigo.toggleClass("tex_popup_total", true);
+            codigo.css("top", codigo_top + 2);
+            if (codigo_esquerda != 0) {
+                $(".cooked").toggleClass("show_full_equation", true);
+            }
+        }
+        // console.timeEnd("Tempo Total");
+    }
+    function eq_tapada() {
+        window.clearTimeout(timerNewMath);
+        console.log("iniciei o timer");
+        timerNewMath = window.setTimeout(() => {
+            console.log("Executei \n");
+            $(".MathJax").each(function () {
+                espaco = $(this).closest(".cooked");
+                // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
+                elRight = $(this).offset().left + $(this).width();
+                espacoRight = espaco.offset().left + espaco.width();
+                //console.log("size: " + $(this).width() + " eq: " +$(this).text());
+                if (elRight > espacoRight) {
+                    console.log($(this).parent());
+                    if ($(this).siblings(".eq_tapada").length == 0) {
+                        $("<div class='eq_tapada'></div>").insertBefore(this);
+                    }
+                    // $(this).addClass("eq_tapada");
+                    console.log("EQ_tapada");
+                } else {
+                    //console.log('VISÍVEL');
+                }
+            });
+        }, "1000");
+    }
+</script>
+
 <script type="text/x-mathjax-config">
     var timerNewMath;
     MathJax.Hub.PreProcess.disabled = true;
@@ -255,31 +353,6 @@
             console.log("Hub: " + message);
         });
     }
-
-    function eq_tapada() {
-        window.clearTimeout(timerNewMath);
-        console.log("iniciei o timer");
-        timerNewMath = window.setTimeout(() => {
-            console.log("Executei \n");
-            $(".MathJax").each(function () {
-                espaco = $(this).closest(".cooked");
-                // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
-                elRight = $(this).offset().left + $(this).width();
-                espacoRight = espaco.offset().left + espaco.width();
-                //console.log("size: " + $(this).width() + " eq: " +$(this).text());
-                if (elRight > espacoRight) {
-                    console.log($(this).parent());
-                    if ($(this).siblings(".eq_tapada").length == 0) {
-                        $("<div class='eq_tapada'></div>").insertBefore(this);
-                    }
-                    // $(this).addClass("eq_tapada");
-                    console.log("EQ_tapada");
-                } else {
-                    //console.log('VISÍVEL');
-                }
-            });
-        }, "1000");
-    }
 </script>
 
 <script type="text/discourse-plugin" version="0.11">
@@ -296,78 +369,4 @@
         },
         { id: "cookMath" }
     );
-</script>
-
-<script>
-    function tex_popup3(equacao) {
-        // console.time("Tempo Total");
-        codigo = $(equacao).prev(); // é a caixa com o código latex
-        // $(equacao) é a equação renderizada pelo MathJax
-        $(".codebox").not(codigo).hide(); //Apaga todos popups de código existentes, menos da equação que clicou
-        $(".MathJax").not($(equacao)).toggleClass("red_carpet", false); //Apaga todas equações red_carpets existentes, menos a eq. que clicou
-        codigo_top = $(equacao).position().top + $(equacao).outerHeight();
-        // console.log($(equacao));
-        // console.log('esse é o id: ' + $(equacao).attr('id'));
-
-        //I need to get the original Tex markup with $$ delimiters
-        //once the Math gets rendered
-        var math = MathJax.Hub.getAllJax($(equacao).parent()[0])[0];
-        // console.log('math: ' + math.root.display);
-        var text = "$" + math.originalText + "$";
-        if (math.root.display) text = "$" + text + "$";
-
-        if (!codigo.hasClass("codebox")) {
-            $(
-                "<dl class='codebox tex_popup tex_popup_lateral_esquerda' style='display: block;'> \
-            <dd> \
-                <code class='tex2jax_ignore'>" +
-                    text +
-                    "</code> \
-            </dd> \
-        </dl>"
-            )
-                .insertBefore(equacao)
-                .hide();
-            codigo = $(equacao).prev(); // é a caixa com o código latex (coloquei o código de novo para quando não está presente)
-        } else {
-            if (codigo.is(":visible")) {
-            }
-        }
-        codigo.css("top", codigo_top);
-        codigo.toggle();
-        $(equacao).toggleClass("red_carpet");
-        equacao_esquerda = $(equacao).offset().left;
-        codigo_esquerda = codigo.offset().left;
-        tamanho_codigo = codigo.outerWidth();
-        tamanho_equacao = $(equacao).outerWidth();
-        equacao_direita = $(equacao).offset().left + tamanho_equacao;
-        codigo_direita = codigo.offset().left + tamanho_codigo;
-
-        $(".MathJax").toggleClass("red_carpet_lateral_direita", false);
-        codigo.toggleClass("tex_popup_lateral_direita", false);
-        $(".MathJax").toggleClass("red_carpet_lateral_esquerda", false);
-        codigo.toggleClass("tex_popup_lateral_esquerda", false);
-        $(".MathJax").toggleClass("red_carpet_total", false);
-        codigo.toggleClass("tex_popup_total", false);
-        $(".cooked").toggleClass("show_full_equation", false);
-
-        if (tamanho_equacao < tamanho_codigo) {
-            if (equacao_esquerda < codigo_esquerda) {
-                $(equacao).toggleClass("red_carpet_lateral_esquerda", true);
-                codigo.toggleClass("tex_popup_lateral_esquerda", true);
-            }
-            if (equacao_direita + 5 > codigo_direita) {
-                $(equacao).toggleClass("red_carpet_lateral_direita", true);
-                codigo.toggleClass("tex_popup_lateral_direita", true);
-            }
-        } else {
-            $(equacao).toggleClass("red_carpet_total", true);
-            codigo.toggleClass("tex_popup_total", true);
-            codigo.css("top", codigo_top + 2);
-            if (codigo_esquerda != 0) {
-                $(".cooked").toggleClass("show_full_equation", true);
-            }
-        }
-        // console.timeEnd("Tempo Total");
-    }
 </script>
