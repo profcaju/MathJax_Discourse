@@ -1,4 +1,5 @@
 <script>
+    var timerNewMath;
     function tex_popup3(equacao) {
         // console.time("Tempo Total");
         codigo = $(equacao).prev(); // é a caixa com o código latex
@@ -97,7 +98,6 @@
 </script>
 
 <script type="text/x-mathjax-config">
-    var timerNewMath;
     MathJax.Hub.PreProcess.disabled = true;
 
     MathJax.Hub.Config({
