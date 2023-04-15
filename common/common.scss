@@ -107,7 +107,7 @@ span.tex3_warning {
 .eq_tapada:before {
     position: relative;
     content: "continua 👉";
-    background-color: lightgrey;
+    background-color: var(--primary-900);
     border-radius: 5px;
     padding: 0 4px 0 2px;
     z-index: 10;
