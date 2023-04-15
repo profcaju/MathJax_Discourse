@@ -102,6 +102,7 @@ span.tex3_warning {
 .eq_tapada {
     width: calc(100%);
     position: absolute;
+    border-top: 1px dashed var(--primary);
 }
 .eq_tapada:before {
     position: relative;
