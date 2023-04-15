@@ -170,6 +170,7 @@
             preview: ["[carregando equação]"],
         },
         TeX: {
+            inlineMath: [["\[tex3\]", "\[\/tex3\]"]],
             extensions: [
                 "AMSmath.js",
                 "AMSsymbols.js",
@@ -352,11 +353,6 @@
             console.log("Hub: " + message);
         });
     }
-    MathJax = {
-        tex: {
-            inlineMath: [["\[tex3\]", "\[\/tex3\]"]],
-        },
-    };
 </script>
 
 <script type="text/discourse-plugin" version="0.11">
