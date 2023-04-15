@@ -73,9 +73,9 @@
     }
     function eq_tapada() {
         window.clearTimeout(timerNewMath);
-        console.log("iniciei o timer");
+        // console.log("iniciei o timer");
         timerNewMath = window.setTimeout(() => {
-            console.log("Executei \n");
+            // console.log("Executei \n");
             $(".MathJax").each(function () {
                 espaco = $(this).closest(".cooked");
                 // limites de fora (retângulo de fora) e eqRet (retângulo da equação).
@@ -83,12 +83,12 @@
                 espacoRight = espaco.offset().left + espaco.width();
                 //console.log("size: " + $(this).width() + " eq: " +$(this).text());
                 if (elRight > espacoRight) {
-                    console.log($(this).parent());
+                    // console.log($(this).parent());
                     if ($(this).siblings(".eq_tapada").length == 0) {
                         $("<div class='eq_tapada'></div>").insertBefore(this);
                     }
                     // $(this).addClass("eq_tapada");
-                    console.log("EQ_tapada");
+                    // console.log("EQ_tapada");
                 } else {
                     //console.log('VISÍVEL');
                 }
@@ -361,7 +361,7 @@
             if (opts?.widget?.dirtyKeys?.name === "post-stream") {
                 if (this?.cooking) clearTimeout(this.cooking);
                 this.cooking = setTimeout(() => {
-                    console.log("All cooking is done, update new content..");
+                    // console.log("All cooking is done, update new content..");
                     eq_tapada();
                     // sessionStorage.setItem("wait", false);
                 });
